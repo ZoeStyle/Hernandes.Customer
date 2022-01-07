@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Notifications", "Hernandes.Customer.Notifications\Hernandes.Customer.Notifications.csproj", "{63693C2C-E7C9-48D3-B0AF-7ECE4E64052E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Notifications.Test", "Hernandes.Customer.Notifications.Test\Hernandes.Customer.Notifications.Test.csproj", "{191C2092-4302-43BB-A9CA-F793C9E94D87}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Response", "Hernandes.Customer.Response\Hernandes.Customer.Response.csproj", "{553638B6-F4A8-4667-8470-86D4A0DDA59E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Response.Test", "Hernandes.Customer.Response.Test\Hernandes.Customer.Response.Test.csproj", "{3982CCC8-FA8F-4666-B245-CE0AB6476FB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Domain", "Hernandes.Customer.Domain\Hernandes.Customer.Domain.csproj", "{326B60FF-1171-4CA0-86DC-0C3CED759A0C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Domain.Test", "Hernandes.Customer.Domain.Test\Hernandes.Customer.Domain.Test.csproj", "{D3473E1F-E85D-4EC6-B0FB-2E6B616B6528}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Application", "Hernandes.Customer.Application\Hernandes.Customer.Application.csproj", "{E66C94D2-B10B-4095-BF31-BBB201B2FD29}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Application.Test", "Hernandes.Customer.Application.Test\Hernandes.Customer.Application.Test.csproj", "{3F8C5E00-817B-4845-A2C1-B9CC47117164}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Infrastructure.Test", "Hernandes.Customer.Infrastructure.Test\Hernandes.Customer.Infrastructure.Test.csproj", "{E9ECB81C-6908-4143-8997-F3B3BC3CADC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hernandes.Customer.Api", "Hernandes.Customer.Api\Hernandes.Customer.Api.csproj", "{CDF7284B-E61D-4173-AD25-D896E8C33941}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63693C2C-E7C9-48D3-B0AF-7ECE4E64052E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63693C2C-E7C9-48D3-B0AF-7ECE4E64052E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63693C2C-E7C9-48D3-B0AF-7ECE4E64052E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63693C2C-E7C9-48D3-B0AF-7ECE4E64052E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{191C2092-4302-43BB-A9CA-F793C9E94D87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191C2092-4302-43BB-A9CA-F793C9E94D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191C2092-4302-43BB-A9CA-F793C9E94D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191C2092-4302-43BB-A9CA-F793C9E94D87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{553638B6-F4A8-4667-8470-86D4A0DDA59E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{553638B6-F4A8-4667-8470-86D4A0DDA59E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{553638B6-F4A8-4667-8470-86D4A0DDA59E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{553638B6-F4A8-4667-8470-86D4A0DDA59E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3982CCC8-FA8F-4666-B245-CE0AB6476FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3982CCC8-FA8F-4666-B245-CE0AB6476FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3982CCC8-FA8F-4666-B245-CE0AB6476FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3982CCC8-FA8F-4666-B245-CE0AB6476FB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{326B60FF-1171-4CA0-86DC-0C3CED759A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{326B60FF-1171-4CA0-86DC-0C3CED759A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{326B60FF-1171-4CA0-86DC-0C3CED759A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{326B60FF-1171-4CA0-86DC-0C3CED759A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3473E1F-E85D-4EC6-B0FB-2E6B616B6528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3473E1F-E85D-4EC6-B0FB-2E6B616B6528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3473E1F-E85D-4EC6-B0FB-2E6B616B6528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3473E1F-E85D-4EC6-B0FB-2E6B616B6528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E66C94D2-B10B-4095-BF31-BBB201B2FD29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E66C94D2-B10B-4095-BF31-BBB201B2FD29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E66C94D2-B10B-4095-BF31-BBB201B2FD29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E66C94D2-B10B-4095-BF31-BBB201B2FD29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F8C5E00-817B-4845-A2C1-B9CC47117164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8C5E00-817B-4845-A2C1-B9CC47117164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8C5E00-817B-4845-A2C1-B9CC47117164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8C5E00-817B-4845-A2C1-B9CC47117164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9ECB81C-6908-4143-8997-F3B3BC3CADC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9ECB81C-6908-4143-8997-F3B3BC3CADC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9ECB81C-6908-4143-8997-F3B3BC3CADC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9ECB81C-6908-4143-8997-F3B3BC3CADC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDF7284B-E61D-4173-AD25-D896E8C33941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDF7284B-E61D-4173-AD25-D896E8C33941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDF7284B-E61D-4173-AD25-D896E8C33941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDF7284B-E61D-4173-AD25-D896E8C33941}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0EA5EF9-041C-4B5C-9ACC-DDF398EF981A}
+	EndGlobalSection
+EndGlobal

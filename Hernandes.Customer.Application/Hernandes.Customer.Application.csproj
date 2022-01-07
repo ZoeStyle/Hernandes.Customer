@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+    <DocumentationFile>..\Hernandes.Customer.Api\Hernandes.Customer.Application.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hernandes.Customer.Domain\Hernandes.Customer.Domain.csproj" />
+    <ProjectReference Include="..\Hernandes.Customer.Notifications\Hernandes.Customer.Notifications.csproj" />
+    <ProjectReference Include="..\Hernandes.Customer.Response\Hernandes.Customer.Response.csproj" />
+  </ItemGroup>
+
+</Project>

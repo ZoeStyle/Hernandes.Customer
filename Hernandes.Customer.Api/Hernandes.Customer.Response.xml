@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hernandes.Customer.Response</name>
+    </assembly>
+    <members>
+        <member name="M:Hernandes.Customer.Response.Contracts.IResponse.ResponseObj">
+            <summary>
+            Return the desired object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hernandes.Customer.Response.Contracts.IResponse.Count">
+            <summary>
+            Displays the number of notifications in case of error, 
+            or if the object is a list it can inform the size of the list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hernandes.Customer.Response.Contracts.IResponse.HasError">
+            <summary>
+            Informs if there is any error in the operation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Hernandes.Customer.Response.Contracts.IResponse.Error">
+            <summary>
+            Returns the error
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Hernandes.Customer.Response.Entities.Error.Code">
+            <summary>
+            Error Code
+            </summary>
+            <example>400</example>
+        </member>
+        <member name="P:Hernandes.Customer.Response.Entities.Error.Description">
+            <summary>
+            Error Description
+            </summary>
+            <example>Bad Request</example>
+        </member>
+        <member name="P:Hernandes.Customer.Response.Entities.Error.Data">
+            <summary>
+            Error data
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hernandes.Customer.Application</name>
+    </assembly>
+    <members>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.Cpf">
+            <summary>
+            Numero do documento
+            </summary>
+            <example>427.487.569-59</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.Name">
+            <summary>
+            Nome do cliente
+            </summary>
+            <example>Miguel Ruan Alves</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.Gender">
+            <summary>
+            Genero do cliente
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.BirthDay">
+            <summary>
+            Data de aniversário
+            </summary>
+            <example>09/09/1947</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.Rg">
+            <summary>
+            Numero do rg
+            </summary>
+            <example>19.100.253-7</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.Street">
+            <summary>
+            Rua
+            </summary>
+            <example>Quadra SOFN Quadra 4 Bloco B</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.City">
+            <summary>
+            Cidade
+            </summary>
+            <example>Brasília</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.State">
+            <summary>
+            Estado
+            </summary>
+            <example>DF</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.Country">
+            <summary>
+            País
+            </summary>
+            <example>BR</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.ZipCode">
+            <summary>
+            CEP
+            </summary>
+            <example>70634-467</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.Number">
+            <summary>
+            Numero
+            </summary>
+            <example>6</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.Cnpj">
+            <summary>
+            Numero do cnpj
+            </summary>
+            <example>89.407.257/0001-76</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.CorporateName">
+            <summary>
+            Nome da empresa
+            </summary>
+            <example>Marcos e Bento Lavanderia Ltda</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.FantasyName">
+            <summary>
+            Nome fantasia
+            </summary>
+            <example>Marcos e Bento Lavanderia Ltda</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.Street">
+            <summary>
+            Rua
+            </summary>
+            <example>Quadra SOFN Quadra 4 Bloco B</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.City">
+            <summary>
+            Cidade
+            </summary>
+            <example>Brasília</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.State">
+            <summary>
+            Estado
+            </summary>
+            <example>DF</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.Country">
+            <summary>
+            País
+            </summary>
+            <example>BR</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.ZipCode">
+            <summary>
+            CEP
+            </summary>
+            <example>70634-467</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.Number">
+            <summary>
+            Numero
+            </summary>
+            <example>6</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonJurCommand.Email">
+            <summary>
+            Email do cliente
+            </summary>
+            <example>marcosviniciusthiagoramos@truckeixo.com.br</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.Id">
+            <summary>
+            Id do cliente
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.Cpf">
+            <summary>
+            Numero do documento
+            </summary>
+            <example>427.487.569-59</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.Name">
+            <summary>
+            Nome do cliente
+            </summary>
+            <example>Miguel Ruan Alves</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.Gender">
+            <summary>
+            Genero do cliente
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.BirthDay">
+            <summary>
+            Data de aniversário
+            </summary>
+            <example>09/09/1947</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.Rg">
+            <summary>
+            Numero do rg
+            </summary>
+            <example>19.100.253-7</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.Street">
+            <summary>
+            Rua
+            </summary>
+            <example>Quadra SOFN Quadra 4 Bloco B</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.City">
+            <summary>
+            Cidade
+            </summary>
+            <example>Brasília</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.State">
+            <summary>
+            Estado
+            </summary>
+            <example>DF</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.Country">
+            <summary>
+            País
+            </summary>
+            <example>BR</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.ZipCode">
+            <summary>
+            CEP
+            </summary>
+            <example>70634-467</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonFisCommand.Number">
+            <summary>
+            Numero
+            </summary>
+            <example>6</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.Id">
+            <summary>
+            Id do cliente
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.Cnpj">
+            <summary>
+            Numero do cnpj
+            </summary>
+            <example>89.407.257/0001-76</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.CorporateName">
+            <summary>
+            Nome da empresa
+            </summary>
+            <example>Marcos e Bento Lavanderia Ltda</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.FantasyName">
+            <summary>
+            Nome fantasia
+            </summary>
+            <example>Marcos e Bento Lavanderia Ltda</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.Street">
+            <summary>
+            Rua
+            </summary>
+            <example>Quadra SOFN Quadra 4 Bloco B</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.City">
+            <summary>
+            Cidade
+            </summary>
+            <example>Brasília</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.State">
+            <summary>
+            Estado
+            </summary>
+            <example>DF</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.Country">
+            <summary>
+            País
+            </summary>
+            <example>BR</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.ZipCode">
+            <summary>
+            CEP
+            </summary>
+            <example>70634-467</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.Number">
+            <summary>
+            Numero
+            </summary>
+            <example>6</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.Commands.UpdateCustomerPersonJurCommand.Email">
+            <summary>
+            Email do cliente
+            </summary>
+            <example>marcosviniciusthiagoramos@truckeixo.com.br</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.DTOs.EmailDTO.Address">
+            <summary>
+            Endereço de email
+            </summary>
+            <example>marcosviniciusthiagoramos@truckeixo.com.br</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.DTOs.PhoneDTO.Ddd">
+            <summary>
+            DDD
+            </summary>
+            <example>61</example>
+        </member>
+        <member name="P:Hernandes.Customer.Application.DTOs.PhoneDTO.Number">
+            <summary>
+            Número do telefone
+            </summary>
+            <example>98225-6373</example>
+        </member>
+    </members>
+</doc>
