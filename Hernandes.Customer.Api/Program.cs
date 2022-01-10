@@ -1,8 +1,8 @@
 using Hernandes.Customer.Api;
-using Hernandes.Customer.Application.Commands;
 using Hernandes.Customer.Application.Handlers;
 using Hernandes.Customer.Application.Repositories;
-using Hernandes.Customer.Infrastructure.Test.Repositories;
+using Hernandes.Customer.Infra.Context;
+using Hernandes.Customer.Infra.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -11,15 +11,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddResponseCompression();
 
+builder.Services.AddScoped<IStoreDataContext, StoreDataContext>();
+
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 builder.Services.AddTransient<CustomerHandler, CustomerHandler>();
-builder.Services.AddTransient<CreateCustomerPersonFisCommand, CreateCustomerPersonFisCommand>();
 
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
 
@@ -87,19 +86,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
-
-//app.UseAuthorization();
-
-//app.MapControllers();
-
-//app.Run();
 
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();

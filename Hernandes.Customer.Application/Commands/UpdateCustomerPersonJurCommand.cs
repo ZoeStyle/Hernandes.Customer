@@ -14,27 +14,28 @@ namespace Hernandes.Customer.Application.Commands
         {
             PhoneList = new List<PhoneDTO>();
         }
-        public UpdateCustomerPersonJurCommand(int id, string cnpj, string corporateName, string fantasyName, string street, string city, string state, string country, string zipCode, string number, string email, List<PhoneDTO> phoneList)
-        {
-            Id = id;
-            Cnpj = cnpj;
-            CorporateName = corporateName;
-            FantasyName = fantasyName;
-            Street = street;
-            City = city;
-            State = state;
-            Country = country;
-            ZipCode = zipCode;
-            Number = number;
-            Email = email;
-            PhoneList = phoneList != null ? phoneList : new List<PhoneDTO>();
-        }
+
+        //public UpdateCustomerPersonJurCommand(string id, string cnpj, string corporateName, string fantasyName, string street, string city, string state, string country, string zipCode, string number, string email, List<PhoneDTO> phoneList)
+        //{
+        //    Id = id;
+        //    Cnpj = cnpj;
+        //    CorporateName = corporateName;
+        //    FantasyName = fantasyName;
+        //    Street = street;
+        //    City = city;
+        //    State = state;
+        //    Country = country;
+        //    ZipCode = zipCode;
+        //    Number = number;
+        //    Email = email;
+        //    PhoneList = new List<PhoneDTO>();
+        //}
 
         /// <summary>
         /// Id do cliente
         /// </summary>
         /// <example>1</example>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Numero do cnpj
@@ -102,7 +103,7 @@ namespace Hernandes.Customer.Application.Commands
         {
             AddNotifications(new Contract<string>()
                 .Requires()
-                .IsGreaterThan(Id, 0, nameof(Id), "This property is mandatory")
+                .IsNotNullOrEmpty(Id, nameof(Id), "This property is mandatory")
                 .IsNotNullOrEmpty(CorporateName, nameof(CorporateName), "This property is mandatory")
                 .IsNotNullOrEmpty(Cnpj, nameof(Cnpj), "This property is mandatory")
                 .IsCNPJ(Cnpj, nameof(Cnpj), "The document entered must contain 18 characters")

@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hernandes.Customer.Application\Hernandes.Customer.Application.csproj" />
-    <ProjectReference Include="..\Hernandes.Customer.Infrastructure.Test\Hernandes.Customer.Infrastructure.Test.csproj" />
+    <ProjectReference Include="..\Hernandes.Customer.Infra\Hernandes.Customer.Infra.csproj" />
   </ItemGroup>
 
 </Project>

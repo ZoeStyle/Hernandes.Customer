@@ -11,7 +11,5 @@ namespace Hernandes.Customer.Domain.Enums
         public static Gender Outros = new(3, nameof(Outros));
         public Gender(int id, string name)
             : base(id, name) { }
-
-        public PersonFis Person { get; }
     }
 }

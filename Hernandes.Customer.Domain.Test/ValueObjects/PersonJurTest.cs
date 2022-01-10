@@ -1,4 +1,5 @@
-﻿using Hernandes.Customer.Domain.ValueObjects;
+﻿using Hernandes.Customer.Domain.Enums;
+using Hernandes.Customer.Domain.ValueObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -16,7 +17,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerJur(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -31,7 +34,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerJur(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -46,7 +51,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerJur(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -62,7 +69,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerJur(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(2, validate.Count());
@@ -79,7 +88,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerJur(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -91,12 +102,36 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
         {
             var person = FakePerson();
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerJur(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(false, validate.HasError());
             Assert.AreEqual(1, validate.Count());
         }
 
+        private Domain.Entities.Customer FakeCustomerJur(PersonJur person) =>
+            new Domain.Entities.Customer(
+                document: FakeDocumentJur(),
+                address: FakeAddress(),
+                personJur: person
+                );
+
+        private Document FakeDocumentJur() =>
+            new Document(
+                documentNumber: "79.769.045/0001-85",
+                type: DocumentType.Juridica
+                );
+
+        private Address FakeAddress() =>
+            new Address(
+                street: "Rua Octávio Gobbi",
+                city: "Colatina",
+                state: "ES",
+                country: "BR",
+                zipCode: "29702-752",
+                number: "870"
+                );
 
         private PersonJur FakePerson(Dictionary<string, object> args = null) =>
             new PersonJur(

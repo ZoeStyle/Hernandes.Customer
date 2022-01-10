@@ -14,7 +14,7 @@ namespace Hernandes.Customer.Application.Test.Commands
         public void Invalid_id()
         {
             var dic = new Dictionary<string, object>();
-            dic["id"] = 0;
+            dic["id"] = null;
 
             var validation = FakeCommandValidate(dic);
 
@@ -271,7 +271,7 @@ namespace Hernandes.Customer.Application.Test.Commands
 
         private UpdateCustomerPersonFisCommand FakeCommand(Dictionary<string, object> args = null) =>
             new UpdateCustomerPersonFisCommand(
-                id: args != null && args.ContainsKey("id") ? (int)args["id"] : 1,
+                id: args != null && args.ContainsKey("id") ? (string)args["id"] : Guid.NewGuid().ToString().Replace("-","").Substring(0,8),
                 cpf: args != null && args.ContainsKey("cpf") ? (string)args["cpf"] : "001.781.548-73",
                 name: args != null && args.ContainsKey("name") ? (string)args["name"] : "Tatiane Nair Alves",
                 gender: args != null && args.ContainsKey("gender") ? (int)args["gender"] : 1,

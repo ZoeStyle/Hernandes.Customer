@@ -14,20 +14,20 @@ namespace Hernandes.Customer.Application.Commands
         {
             PhoneList = new List<PhoneDTO>();
         }
-        public CreateCustomerPersonJurCommand(string cnpj, string corporateName, string fantasyName, string street, string city, string state, string country, string zipCode, string number, string email, List<PhoneDTO> phoneList)
-        {
-            Cnpj = cnpj;
-            CorporateName = corporateName;
-            FantasyName = fantasyName;
-            Street = street;
-            City = city;
-            State = state;
-            Country = country;
-            ZipCode = zipCode;
-            Number = number;
-            Email = email;
-            PhoneList = phoneList != null ? phoneList : new List<PhoneDTO>();
-        }
+        //public CreateCustomerPersonJurCommand(string cnpj, string corporateName, string fantasyName, string street, string city, string state, string country, string zipCode, string number, string email, List<PhoneDTO> phoneList)
+        //{
+        //    Cnpj = cnpj;
+        //    CorporateName = corporateName;
+        //    FantasyName = fantasyName;
+        //    Street = street;
+        //    City = city;
+        //    State = state;
+        //    Country = country;
+        //    ZipCode = zipCode;
+        //    Number = number;
+        //    Email = email;
+        //    PhoneList = phoneList != null ? phoneList : new List<PhoneDTO>();
+        //}
 
         /// <summary>
         /// Numero do cnpj

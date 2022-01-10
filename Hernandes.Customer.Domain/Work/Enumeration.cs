@@ -12,7 +12,7 @@
         
         protected Enumeration(int id, string name) => (_id, _name) = (id, name);
 
-        public override string ToString() => Name;
+        public override string ToString() => "{ Name : \"" + Name + "\" }";
 
         public int CompareTo(object other) => Id.CompareTo(((Enumeration)other).Id);
     }

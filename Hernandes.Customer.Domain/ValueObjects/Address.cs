@@ -1,7 +1,4 @@
 ﻿using Hernandes.Customer.Domain.Work;
-using Hernandes.Customer.Notifications.Validations;
-using Hernandes.Customer.Response;
-using Hernandes.Customer.Response.Contracts;
 
 namespace Hernandes.Customer.Domain.ValueObjects
 {
@@ -33,25 +30,6 @@ namespace Hernandes.Customer.Domain.ValueObjects
             _country = country;
             _zipCode = zipCode;
             _number = number;
-        }
-
-
-        public override IResponse Validate()
-        {
-            AddNotifications(new Contract<string>()
-                        .Requires()
-                        .IsLowerOrEqualsThan(_street, 60, nameof(_street), "This field must contain a maximum of 60 characters")
-                        .IsLowerOrEqualsThan(_city, 60, nameof(_city), "This field must contain a maximum of 60 characters")
-                        .IsLowerOrEqualsThan(_state, 2, nameof(_state), "This field must contain a maximum of 2 characters")
-                        .IsLowerOrEqualsThan(_country, 2, nameof(_country), "This field must contain a maximum of 2 characters")
-                        .IsLowerOrEqualsThan(_zipCode, 9, nameof(_zipCode), "This field must contain a maximum of 9 characters")
-                        .IsLowerOrEqualsThan(_number, 5, nameof(_number), "This field must contain a maximum of 5 characters")
-                        );
-
-            if (IsValid)
-                return new ResponseOk<Address>(this, 1);
-
-            return new ResponseError<Address>("400", "The address was filled out incorrectly.", this.Notifications, this.Notifications.Count);
         }
     }
 }

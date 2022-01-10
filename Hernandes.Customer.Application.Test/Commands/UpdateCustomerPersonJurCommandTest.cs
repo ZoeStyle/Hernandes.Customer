@@ -2,6 +2,7 @@
 using Hernandes.Customer.Application.DTOs;
 using Hernandes.Customer.Response.Contracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace Hernandes.Customer.Application.Test.Commands
@@ -13,7 +14,7 @@ namespace Hernandes.Customer.Application.Test.Commands
         public void Invalid_id()
         {
             var dic = new Dictionary<string, object>();
-            dic["id"] = 0;
+            dic["id"] = null;
 
             var validation = FakeCommandValidate(dic);
 
@@ -218,7 +219,7 @@ namespace Hernandes.Customer.Application.Test.Commands
 
         private UpdateCustomerPersonJurCommand FakeCommand(Dictionary<string, object> args = null) =>
             new UpdateCustomerPersonJurCommand(
-                id: args != null && args.ContainsKey("id") ? (int)args["id"] : 1,
+                id: args != null && args.ContainsKey("id") ? (string)args["id"] : Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8),
                 cnpj: args != null && args.ContainsKey("cnpj") ? (string)args["cnpj"] : "14.603.191/0001-90",
                 corporateName: args != null && args.ContainsKey("corporateName") ? (string)args["corporateName"] : "Luzia e Nelson Telecomunicações Ltda",
                 fantasyName: args != null && args.ContainsKey("fantasyName") ? (string)args["fantasyName"] : "Luzia e Nelson Telecomunicações Ltda",

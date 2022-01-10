@@ -18,6 +18,15 @@
             _notifications.Add(notification);
         }
 
+        public void AddNotification(string key, List<string> messages)
+        {
+            foreach(var message in messages)
+            {
+                var notification = GetNotificationInstance(key, message);
+                _notifications.Add(notification);
+            }
+        }
+
         public void AddNotification(T notification) =>
             _notifications.Add(notification);
 

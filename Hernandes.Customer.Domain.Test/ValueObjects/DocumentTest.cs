@@ -16,7 +16,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeDocument = FakeDocumentFis(dic);
 
-            var validate = fakeDocument.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeDocument);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -30,7 +32,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeDocument = FakeDocumentFis(dic);
 
-            var validate = fakeDocument.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeDocument);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -44,7 +48,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeDocument = FakeDocumentFis(dic);
 
-            var validate = fakeDocument.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeDocument);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(false, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -58,7 +64,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeDocument = FakeDocumentJur(dic);
 
-            var validate = fakeDocument.Validate();
+            var fakeCustomer = FakeCustomerJur(fakeDocument);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -72,7 +80,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeDocument = FakeDocumentJur(dic);
 
-            var validate = fakeDocument.Validate();
+            var fakeCustomer = FakeCustomerJur(fakeDocument);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -86,12 +96,52 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeDocument = FakeDocumentJur(dic);
 
-            var validate = fakeDocument.Validate();
+            var fakeCustomer = FakeCustomerJur(fakeDocument);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(false, validate.HasError());
             Assert.AreEqual(1, validate.Count());
         }
 
+        private Domain.Entities.Customer FakeCustomerFis(Document document) =>
+            new Domain.Entities.Customer(
+                document: document,
+                address: FakeAddress(),
+                personFis: FakePersonFis()
+                );
+
+        private Domain.Entities.Customer FakeCustomerJur(Document document) =>
+            new Domain.Entities.Customer(
+                document: document,
+                address: FakeAddress(),
+                personJur: FakePersonJur()
+                );
+
+        private Address FakeAddress() =>
+            new Address(
+                street: "Rua Octávio Gobbi",
+                city: "Colatina",
+                state: "ES",
+                country: "BR",
+                zipCode: "29702-752",
+                number: "870"
+                );
+
+        private PersonFis FakePersonFis() =>
+            new PersonFis(
+                name: "Henrique Fábio Rocha",
+                gender: Gender.Masculino,
+                birthDay: null,
+                rg: "33.310.653-2"
+                );
+
+        private PersonJur FakePersonJur() =>
+            new PersonJur(
+                corporateName: "Andreia e Sebastiana Telecomunicações Ltda",
+                fantasyName: "Andreia e Sebastiana Telecomunicações Ltda"
+                );
+       
         private Document FakeDocumentJur(Dictionary<string, object> args = null) =>
             new Document(
                 documentNumber: args != null && args.ContainsKey("documentNumber") ? (string)args["documentNumber"] : "21.036.947/0001-22",

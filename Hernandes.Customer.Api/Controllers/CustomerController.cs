@@ -26,6 +26,28 @@ namespace Hernandes.Customer.Api.Controllers
         /// Gets a customer through one of the completed queries / Obtém um cliente através de umas das query preenchida
         /// </summary>
         /// <param name="repository"></param>
+        /// <param name="cpf">188.963.553-70</param>
+        /// <param name="name">Sophie Mariane Mariah Pinto</param>
+        /// <param name="rg">31.558.190-6</param>
+        /// <returns></returns>
+        [HttpGet, Route("PersonFis"), Authorize]
+        public async Task<ActionResult> GetAsyncFis([FromServices] ICustomerRepository repository, [FromQuery] string cpf, [FromQuery] string name, [FromQuery] string rg)
+        {
+            if (string.IsNullOrEmpty(cpf) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(rg))
+                return BadRequest(new { Message = "It is necessary to inform one of the queries" });
+
+            var find = await repository.GetAsyncFis(cpf, name, rg);
+
+            if (find.HasError())
+                return BadRequest(find.Error());
+
+            return Ok(find);
+        }
+
+        /// <summary>
+        /// Gets a customer through one of the completed queries / Obtém um cliente através de umas das query preenchida
+        /// </summary>
+        /// <param name="repository"></param>
         /// <param name="cnpj">19.204.523/0001-88</param>
         /// <param name="companyName">Andreia e Sarah Buffet ME</param>
         /// <param name="fantasyName">Andreia e Sarah Buffet ME</param>
@@ -41,7 +63,24 @@ namespace Hernandes.Customer.Api.Controllers
             if (find.HasError())
                 return BadRequest(find.Error());
 
-            return Ok(find);
+            return Ok(find.ResponseObj());
+        }
+        
+        /// <summary>
+        /// Create a new customer as a individual / Crie um novo cliente como uma pessoa Fisica
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost, Route("PersonFis"), Authorize]
+        public async Task<ActionResult<IResponse>> CreatePesonFis([FromServices] CustomerHandler handler, [FromBody] CreateCustomerPersonFisCommand command)
+        {
+            var result = await handler.Handle(command);
+
+            if (result.HasError())
+                return BadRequest(result.Error());
+
+            return Ok(result.ResponseObj());
         }
 
         /// <summary>
@@ -62,13 +101,33 @@ namespace Hernandes.Customer.Api.Controllers
         }
 
         /// <summary>
+        /// Update the individual customer / Atualiza o cliente pessoa Fisica
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPut, Route("PersonFis/{id}"), Authorize]
+        public async Task<ActionResult<IResponse>> PutPesonFis([FromServices] CustomerHandler handler, [FromBody] UpdateCustomerPersonFisCommand command, [FromRoute] string id)
+        {
+            if (id != command.Id)
+                return BadRequest(new { message = "invalid id" });
+
+            var result = await handler.Handle(command);
+
+            if (result.HasError())
+                return BadRequest(result.Error());
+
+            return Ok(result.ResponseObj());
+        }
+
+        /// <summary>
         /// Update the corporate customer / Atualiza o cliente pessoa Juridica 
         /// </summary>
         /// <param name="handler"></param>
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut, Route("PersonJur/{id}"), Authorize]
-        public async Task<ActionResult<IResponse>> PutPersonJur([FromServices] CustomerHandler handler, [FromBody] UpdateCustomerPersonJurCommand command, [FromRoute] int id)
+        public async Task<ActionResult<IResponse>> PutPersonJur([FromServices] CustomerHandler handler, [FromBody] UpdateCustomerPersonJurCommand command, [FromRoute] string id)
         {
             if (id != command.Id)
                 return BadRequest(new { message = "invalid id" });
@@ -80,65 +139,6 @@ namespace Hernandes.Customer.Api.Controllers
 
             return Ok(result.ResponseObj());
         }
-
-        ///// <summary>
-        ///// Gets a customer through one of the completed queries / Obtém um cliente através de umas das query preenchida
-        ///// </summary>
-        ///// <param name="repository"></param>
-        ///// <param name="cpf">188.963.553-70</param>
-        ///// <param name="name">Sophie Mariane Mariah Pinto</param>
-        ///// <param name="rg">31.558.190-6</param>
-        ///// <returns></returns>
-        //[HttpGet, Route("PersonFis"), Authorize]
-        //public async Task<ActionResult> GetAsyncFis([FromServices] ICustomerRepository repository, [FromQuery] string cpf, [FromQuery] string name, [FromQuery] string rg)
-        //{
-        //    if (string.IsNullOrEmpty(cpf) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(rg))
-        //        return BadRequest(new { Message = "It is necessary to inform one of the queries" });
-
-        //    var find = await repository.GetAsyncFis(cpf, name, rg);
-
-        //    if (find.HasError())
-        //        return BadRequest(find.Error());
-
-        //    return Ok(find);
-        //}
-
-        ///// <summary>
-        ///// Create a new customer as a individual / Crie um novo cliente como uma pessoa Fisica
-        ///// </summary>
-        ///// <param name="handler"></param>
-        ///// <param name="command"></param>
-        ///// <returns></returns>
-        //[HttpPost, Route("PersonFis"), Authorize]
-        //public async Task<ActionResult<IResponse>> CreatePesonFis([FromServices] CustomerHandler handler, [FromBody] CreateCustomerPersonFisCommand command)
-        //{
-        //    var result = await handler.Handle(command);
-
-        //    if (result.HasError())
-        //        return BadRequest(result.Error());
-
-        //    return Ok(result.ResponseObj());
-        //}
-
-        ///// <summary>
-        ///// Update the individual customer / Atualiza o cliente pessoa Fisica
-        ///// </summary>
-        ///// <param name="handler"></param>
-        ///// <param name="command"></param>
-        ///// <returns></returns>
-        //[HttpPut, Route("PersonFis/{id}"), Authorize]
-        //public async Task<ActionResult<IResponse>> PutPesonFis([FromServices] CustomerHandler handler, [FromBody] UpdateCustomerPersonFisCommand command, [FromRoute]int id)
-        //{
-        //    if (id != command.Id)
-        //        return BadRequest(new { message = "invalid id" });
-
-        //    var result = await handler.Handle(command);
-
-        //    if (result.HasError())
-        //        return BadRequest(result.Error());
-
-        //    return Ok(result.ResponseObj());
-        //}
 
     }
 }

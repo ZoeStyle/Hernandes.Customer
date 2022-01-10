@@ -8,7 +8,7 @@ namespace Hernandes.Customer.Application.Repositories
         Task<IResponse> Update(Domain.Entities.Customer customer);
         Task<IResponse> GetAsyncFis(string cpf, string name, string rg);
         Task<IResponse> GetAsyncJur(string cnpj, string corporateName, string fantasyName);
-        Task<IResponse> GetByIdAsync(int id);
+        Task<IResponse> GetByIdAsync(string id);
         Task<IResponse> GetAll();
     }
 }

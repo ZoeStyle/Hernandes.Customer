@@ -16,7 +16,7 @@ namespace Hernandes.Customer.Application.Commands
             PhoneList = new List<PhoneDTO>();
         }
 
-        public UpdateCustomerPersonFisCommand(int id, string cpf, string name, int gender, DateTime? birthDay, string rg, string street, string city, string state, string country, string zipCode, string number, List<EmailDTO> emailList, List<PhoneDTO> phoneList)
+        public UpdateCustomerPersonFisCommand(string id, string cpf, string name, int gender, DateTime? birthDay, string rg, string street, string city, string state, string country, string zipCode, string number, List<EmailDTO> emailList, List<PhoneDTO> phoneList)
         {
             Id = id;
             Cpf = cpf;
@@ -38,7 +38,7 @@ namespace Hernandes.Customer.Application.Commands
         /// Id do cliente
         /// </summary>
         /// <example>1</example>
-        public int Id { get; set; }
+        public string Id { get; set; }
         /// <summary>
         /// Numero do documento
         /// </summary>
@@ -111,7 +111,7 @@ namespace Hernandes.Customer.Application.Commands
         {
             AddNotifications(new Contract<string>()
                 .Requires()
-                .IsGreaterThan(Id, 0, nameof(Id), "This property is mandatory")
+                .IsNotNullOrEmpty(Id, nameof(Id), "This property is mandatory")
                 .IsNotNullOrEmpty(Name, nameof(Name), "This property is mandatory")
                 .IsNotNullOrEmpty(Cpf, nameof(Cpf), "This property is mandatory")
                 .IsCPF(Cpf, nameof(Cpf), "The document entered must contain 14 characters")

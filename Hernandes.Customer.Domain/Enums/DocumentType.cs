@@ -12,6 +12,5 @@ namespace Hernandes.Customer.Domain.Enums
         public DocumentType(int id, string name)
             : base(id, name) { }
 
-        public Document Document { get; }
     }
 }

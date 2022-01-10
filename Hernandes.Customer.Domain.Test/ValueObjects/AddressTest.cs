@@ -1,4 +1,5 @@
-﻿using Hernandes.Customer.Domain.ValueObjects;
+﻿using Hernandes.Customer.Domain.Enums;
+using Hernandes.Customer.Domain.ValueObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -16,10 +17,12 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeAddress = FakeAddress(dic);
 
-            var validate = fakeAddress.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeAddress);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
-            Assert.AreEqual(1,validate.Count());
+            Assert.AreEqual(1, validate.Count());
         }
 
         [TestCategory("Address Test")]
@@ -31,7 +34,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeAddress = FakeAddress(dic);
 
-            var validate = fakeAddress.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeAddress);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -46,7 +51,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeAddress = FakeAddress(dic);
 
-            var validate = fakeAddress.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeAddress);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -61,7 +68,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeAddress = FakeAddress(dic);
 
-            var validate = fakeAddress.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeAddress);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -76,7 +85,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeAddress = FakeAddress(dic);
 
-            var validate = fakeAddress.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeAddress);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -93,12 +104,13 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeAddress = FakeAddress(dic);
 
-            var validate = fakeAddress.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeAddress);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(3, validate.Count());
         }
-
 
         [TestCategory("Address Test")]
         [TestMethod("Number invalid")]
@@ -109,7 +121,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var fakeAddress = FakeAddress(dic);
 
-            var validate = fakeAddress.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeAddress);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -121,11 +135,26 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
         {
             var fakeAddress = FakeAddress();
 
-            var validate = fakeAddress.Validate();
+            var fakeCustomer = FakeCustomerFis(fakeAddress);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(false, validate.HasError());
             Assert.AreEqual(1, validate.Count());
         }
+
+        private Domain.Entities.Customer FakeCustomerFis(Address address) =>
+        new Domain.Entities.Customer(
+            document: FakeDocumentFis(),
+            address: address,
+            personFis: FakePersonFis()
+            );
+
+        private Document FakeDocumentFis() =>
+        new Document(
+            documentNumber: "155.718.756-82",
+            type: DocumentType.Fisica
+            );
 
         private Address FakeAddress(Dictionary<string, object> args = null) =>
             new Address(
@@ -135,6 +164,15 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
                 country: args != null && args.ContainsKey("country") ? (string)args["country"] : "BR",
                 zipCode: args != null && args.ContainsKey("zipCode") ? (string)args["zipCode"] : "29702-752",
                 number: args != null && args.ContainsKey("number") ? (string)args["number"] : "870"
-                );
+            );
+
+        private PersonFis FakePersonFis() =>
+    new PersonFis(
+        name: "Henrique Fábio Rocha",
+        gender: Gender.Masculino,
+        birthDay: null,
+        rg: "33.310.653-2"
+        );
+
     }
 }

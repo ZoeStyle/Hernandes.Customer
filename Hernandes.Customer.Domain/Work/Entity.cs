@@ -3,20 +3,21 @@ using Hernandes.Customer.Response.Contracts;
 
 namespace Hernandes.Customer.Domain.Work
 {
-    public abstract class Entity : Notifiable<Notification>
+    public abstract class Entity 
     {
-        int _Id;
+        public Entity()
+        {
+            _Id = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10);
+        }
 
-        public virtual int Id
+        string _Id;
+
+        public virtual string Id
         {
             get => _Id;
             protected set => _Id = value;
         }
 
         public abstract IResponse Validate();
-
-#if DEBUG
-        public void SetId(int id) => _Id = id;
-#endif
     }
 }

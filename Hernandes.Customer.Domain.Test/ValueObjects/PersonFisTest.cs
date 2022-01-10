@@ -18,7 +18,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerFis(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -33,7 +35,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerFis(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -48,7 +52,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerFis(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -63,7 +69,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerFis(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -78,7 +86,9 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
 
             var person = FakePerson(dic);
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerFis(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(true, validate.HasError());
             Assert.AreEqual(1, validate.Count());
@@ -90,11 +100,36 @@ namespace Hernandes.Customer.Domain.Test.ValueObjects
         {
             var person = FakePerson();
 
-            var validate = person.Validate();
+            var fakeCustomer = FakeCustomerFis(person);
+
+            var validate = fakeCustomer.Validate();
 
             Assert.AreEqual(false, validate.HasError());
             Assert.AreEqual(1, validate.Count());
         }
+
+        private Domain.Entities.Customer FakeCustomerFis(PersonFis person) =>
+            new Domain.Entities.Customer(
+                document: FakeDocumentFis(),
+                address: FakeAddress(),
+                personFis: person
+                );
+
+        private Document FakeDocumentFis() =>
+        new Document(
+            documentNumber: "155.718.756-82",
+            type: DocumentType.Fisica
+            );
+
+        private Address FakeAddress() =>
+            new Address(
+                street: "Rua Octávio Gobbi",
+                city: "Colatina",
+                state: "ES",
+                country: "BR",
+                zipCode: "29702-752",
+                number: "870"
+                );
 
         private PersonFis FakePerson(Dictionary<string, object> args = null) =>
             new PersonFis(
