@@ -8,7 +8,7 @@ Foi criado um projeto WebApi, utilizando os seguintes recursos:
 
 - Arquetetura em camadas: Notifications, Response, Domain, Application, Infrastructure e Api;
 
-- Banco de dados: em memoria;
+- Banco de dados: MongoDb;
 
 Funcionalidades implementadas
 
@@ -73,23 +73,48 @@ Response é uma maneira de padronizar resposta e facilitar o trabalho e integra�
 
 Responsável por representar conceitos, informações e regras sobre a situação do negócio. Aqui, um estado que reflete a situação de negócio é controlado e usado, embora os detalhes técnicos de armazenagem sejam delegados à infraestrutura. Esta é o coração do software do negócio.
 
+Foi adicionado as seguintes subCamadas: Entities, ValueObject, Services, Enums, Work
+
+        Em breve as decrições de todas as subcamadas
+               
 - ### Application
 
 Define as funções que o software deve executar e direciona os objetos expressivos do domínio para resolver os problemas. As tarefas sob a responsabilidade desta camada têm grande significado para o negócio ou são necessárias para a iteração com as camadas de aplicativos de outros sistemas.
 
 Essa camada é mantida estreita. Ela não contém as regras ou o conhecimento do negócio, mas apenas coordena as tarefas e delega os trabalhos para o conjunto de objetos e o domínio na camada logo abaixo.  Ela não tem um estado que reflita a situação do negócio, mas pode ter um estado que reflita o andamento de uma tarefa para o usuário ou programa.
 
+Foi adicionado as seguintes subCamadas: Commands, DTOs, Handlers, Repositories
+
+        Em breve as decrições de todas as subcamadas
+  
 - ### Infrastructure
 
 Fornece recursos técnicos genéricos que suportam as camadas mais altas: envio de mensagem para o aplicativo, persistência de domínio, assim por diante. 
 
+Foi adicionado as seguintes subCamadas: Context, Repositories
+
+        Em breve as decrições de todas as subcamadas
+  
 - ### Api
 
 Responsável por mostrar informações ao usuário e interpretar os comandos do usuário. O agente externo pode, as vezes, ser outro sistema de computador em vez de usuário.
 
+Foi adicionado as seguintes subCamadas: Controllers, Services
+
+        Em breve as decrições de todas as subcamadas
+  
 ---
 
-# Como executar o projeto ?
+## Banco de Dados
+
+- ### MongoDb
+
+MongoDB é um software de banco de dados orientado a documentos livre, de código aberto e multiplataforma.
+
+Classificado como um programa de banco de dados NoSQL, o MongoDB usa documentos semelhantes a JSON com esquemas.
+
+
+## Como executar o projeto ?
 
 - Dentro do visual studio defina o projeto de inicialização como Customer.Hernandes.Api aperte F5
 
