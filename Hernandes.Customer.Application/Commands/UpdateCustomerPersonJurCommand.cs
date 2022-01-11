@@ -15,21 +15,21 @@ namespace Hernandes.Customer.Application.Commands
             PhoneList = new List<PhoneDTO>();
         }
 
-        //public UpdateCustomerPersonJurCommand(string id, string cnpj, string corporateName, string fantasyName, string street, string city, string state, string country, string zipCode, string number, string email, List<PhoneDTO> phoneList)
-        //{
-        //    Id = id;
-        //    Cnpj = cnpj;
-        //    CorporateName = corporateName;
-        //    FantasyName = fantasyName;
-        //    Street = street;
-        //    City = city;
-        //    State = state;
-        //    Country = country;
-        //    ZipCode = zipCode;
-        //    Number = number;
-        //    Email = email;
-        //    PhoneList = new List<PhoneDTO>();
-        //}
+        public UpdateCustomerPersonJurCommand(string id, string cnpj, string corporateName, string fantasyName, string street, string city, string state, string country, string zipCode, string number, string email, List<PhoneDTO> phoneList)
+        {
+            Id = id;
+            Cnpj = cnpj;
+            CorporateName = corporateName;
+            FantasyName = fantasyName;
+            Street = street;
+            City = city;
+            State = state;
+            Country = country;
+            ZipCode = zipCode;
+            Number = number;
+            Email = email;
+            PhoneList = phoneList != null ? phoneList : new List<PhoneDTO>();
+        }
 
         /// <summary>
         /// Id do cliente
@@ -118,11 +118,13 @@ namespace Hernandes.Customer.Application.Commands
                 );
 
             if (Email != null)
+            {
                 AddNotifications(new Contract<string>()
                     .Requires()
                     .IsEmail(Email, nameof(Email))
                     .IsLowerOrEqualsThan(Email, 100, nameof(Email), "This field must contain a maximum of 100 characters")
                     );
+            }
 
             if (PhoneList.Count > 0)
             {

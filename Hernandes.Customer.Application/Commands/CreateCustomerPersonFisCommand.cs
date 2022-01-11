@@ -15,6 +15,7 @@ namespace Hernandes.Customer.Application.Commands
             EmailList = new List<EmailDTO>();
             PhoneList = new List<PhoneDTO>();
         }
+
         public CreateCustomerPersonFisCommand(string cpf, string name, int gender, DateTime? birthDay, string rg, string street, string city, string state, string country, string zipCode, string number, List<EmailDTO> emailList, List<PhoneDTO> phoneList)
         {
             Cpf = cpf;
@@ -53,7 +54,7 @@ namespace Hernandes.Customer.Application.Commands
         /// <summary>
         /// Data de aniversário
         /// </summary>
-        /// <example>09/09/1947</example>
+        /// <example>1947-09-10</example>
         public DateTime? BirthDay { get; set; }
 
         /// <summary>

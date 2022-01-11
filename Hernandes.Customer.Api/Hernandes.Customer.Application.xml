@@ -26,7 +26,7 @@
             <summary>
             Data de aniversário
             </summary>
-            <example>09/09/1947</example>
+            <example>1947-09-10</example>
         </member>
         <member name="P:Hernandes.Customer.Application.Commands.CreateCustomerPersonFisCommand.Rg">
             <summary>

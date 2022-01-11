@@ -12,7 +12,6 @@ namespace Hernandes.Customer.Domain.ValueObjects
         private string _zipCode;
         private string _number;
 
-        //public Customer Customer { get; }
         public string Street { get => _street; }
         public string City { get => _city; }
         public string State { get => _state; }

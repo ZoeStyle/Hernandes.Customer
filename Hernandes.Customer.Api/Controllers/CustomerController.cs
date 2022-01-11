@@ -14,7 +14,7 @@ namespace Hernandes.Customer.Api.Controllers
         /// Gets all registered customers in the database / Obtem todos os clientes cadastrados na base de dados
         /// </summary>
         /// <returns></returns>
-        [HttpGet, Route(""), Authorize]
+        [HttpGet, Route("")/*, Authorize*/]
         public async Task<ActionResult> GetAll([FromServices] ICustomerRepository repository)
         {
             var find = await repository.GetAll();
@@ -30,7 +30,7 @@ namespace Hernandes.Customer.Api.Controllers
         /// <param name="name">Sophie Mariane Mariah Pinto</param>
         /// <param name="rg">31.558.190-6</param>
         /// <returns></returns>
-        [HttpGet, Route("PersonFis"), Authorize]
+        [HttpGet, Route("PersonFis")/*, Authorize*/]
         public async Task<ActionResult> GetAsyncFis([FromServices] ICustomerRepository repository, [FromQuery] string cpf, [FromQuery] string name, [FromQuery] string rg)
         {
             if (string.IsNullOrEmpty(cpf) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(rg))
@@ -52,7 +52,7 @@ namespace Hernandes.Customer.Api.Controllers
         /// <param name="companyName">Andreia e Sarah Buffet ME</param>
         /// <param name="fantasyName">Andreia e Sarah Buffet ME</param>
         /// <returns></returns>
-        [HttpGet, Route("PersonJur"), Authorize]
+        [HttpGet, Route("PersonJur")/*, Authorize*/]
         public async Task<ActionResult> GetAsyncJur([FromServices] ICustomerRepository repository, [FromQuery] string cnpj, [FromQuery] string companyName, [FromQuery] string fantasyName)
         {
             if (string.IsNullOrEmpty(cnpj) && string.IsNullOrEmpty(companyName) && string.IsNullOrEmpty(fantasyName))
@@ -72,9 +72,12 @@ namespace Hernandes.Customer.Api.Controllers
         /// <param name="handler"></param>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost, Route("PersonFis"), Authorize]
+        [HttpPost, Route("PersonFis")/*, Authorize*/]
         public async Task<ActionResult<IResponse>> CreatePesonFis([FromServices] CustomerHandler handler, [FromBody] CreateCustomerPersonFisCommand command)
         {
+            if (command == null)
+                return BadRequest(new { Error = "Invalid request"});
+
             var result = await handler.Handle(command);
 
             if (result.HasError())
@@ -89,9 +92,12 @@ namespace Hernandes.Customer.Api.Controllers
         /// <param name="handler"></param>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost, Route("PersonJur"), Authorize]
+        [HttpPost, Route("PersonJur")/*, Authorize*/]
         public async Task<ActionResult<IResponse>> CreatePersonJur([FromServices] CustomerHandler handler, [FromBody] CreateCustomerPersonJurCommand command)
         {
+            if (command == null)
+                return BadRequest(new { Error = "Invalid request" });
+
             var result = await handler.Handle(command);
 
             if (result.HasError())
@@ -106,9 +112,12 @@ namespace Hernandes.Customer.Api.Controllers
         /// <param name="handler"></param>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPut, Route("PersonFis/{id}"), Authorize]
+        [HttpPut, Route("PersonFis/{id}")/*, Authorize*/]
         public async Task<ActionResult<IResponse>> PutPesonFis([FromServices] CustomerHandler handler, [FromBody] UpdateCustomerPersonFisCommand command, [FromRoute] string id)
         {
+            if (command == null)
+                return BadRequest(new { Error = "Invalid request" });
+
             if (id != command.Id)
                 return BadRequest(new { message = "invalid id" });
 
@@ -126,9 +135,12 @@ namespace Hernandes.Customer.Api.Controllers
         /// <param name="handler"></param>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPut, Route("PersonJur/{id}"), Authorize]
+        [HttpPut, Route("PersonJur/{id}")/*, Authorize*/]
         public async Task<ActionResult<IResponse>> PutPersonJur([FromServices] CustomerHandler handler, [FromBody] UpdateCustomerPersonJurCommand command, [FromRoute] string id)
         {
+            if (command == null)
+                return BadRequest(new { Error = "Invalid request" });
+
             if (id != command.Id)
                 return BadRequest(new { message = "invalid id" });
             

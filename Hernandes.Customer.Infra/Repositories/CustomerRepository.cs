@@ -1,9 +1,11 @@
 ﻿using Hernandes.Customer.Application.Repositories;
 using Hernandes.Customer.Infra.Context;
+using Hernandes.Customer.Infra.Events;
 using Hernandes.Customer.Notifications.Notifications;
 using Hernandes.Customer.Response;
 using Hernandes.Customer.Response.Contracts;
 using MongoDB.Driver;
+using Hernandes.Customer.Infra.Cache;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,141 +13,202 @@ namespace Hernandes.Customer.Infra.Repositories
 {
     public class CustomerRepository : Notifiable<Notification>, ICustomerRepository
     {
-        private readonly IStoreDataContext _context;
+        #region Delegates
+        delegate void InsertEventHandler(object sender, QueueEventsArgs e);
+        delegate void UpdateEventHandler(object sender, QueueEventsArgs e);
+        delegate void ConvertToListEventHandler(object sender, ListEventsArgs e);
+        #endregion
+
+        #region Events
+        event InsertEventHandler InsertDb;
+        event UpdateEventHandler UpdateDb;
+        event ConvertToListEventHandler Convert;
+        #endregion
+
+        #region variables
+        readonly IStoreDataContext _context;
+        IDictionary<string, Domain.Entities.Customer> _dictionary;
+        Queue<Domain.Entities.Customer> _queue/* = new Queue<Domain.Entities.Customer>()*/;
+        IList<Domain.Entities.Customer> _list /*= new List<Domain.Entities.Customer>()*/;
+        #endregion
 
         public CustomerRepository(IStoreDataContext context)
         {
             _context = context;
+            _dictionary = new Dictionary<string, Domain.Entities.Customer>();
+            _queue = new Queue<Domain.Entities.Customer>();
+            _list = new List<Domain.Entities.Customer>();
+
+            LoadList();
         }
 
         public async Task<IResponse> Add(Domain.Entities.Customer customer)
         {
-            try
-            {
-                await _context.Customers.InsertOneAsync(customer);
-                return new ResponseOk<Domain.Entities.Customer>(customer);
-            }
-            catch (Exception e)
-            {
-                AddNotification("Error", e.Message);
-                return new ResponseError<Domain.Entities.Customer>("400", e.Message, Notifications, Notifications.Count);
-            }
+            InsertDb += new InsertEventHandler(InsertDatabase);
+
+            HandlerCustomer(customer);
+
+            return new ResponseOk<Domain.Entities.Customer>(customer);
         }
 
         public async Task<IResponse> GetAll()
         {
-            try
-            {
-                var result = await _context.Customers.Find(x => x.Id != null).ToListAsync();
+            var result = _list.AsQueryable().ToList();
 
-                if (result != null)
-                    return new ResponseOk<IEnumerable<Domain.Entities.Customer>>(result);
+            if (result.Count > 0)
+                return new ResponseOk<List<Domain.Entities.Customer>>(result);
 
-                AddNotification("Error", "NotFound");
+            AddNotification("Error", "NotFound");
 
-                return new ResponseError<IEnumerable<Domain.Entities.Customer>>("404", "NotFound", Notifications, Notifications.Count);
-
-            }
-            catch (Exception ex)
-            {
-                AddNotification("Error", ex.Message);
-
-                return new ResponseError<IEnumerable<Domain.Entities.Customer>>("400", ex.Message, Notifications, Notifications.Count);
-            }
+            return new ResponseError<IEnumerable<Domain.Entities.Customer>>("404", "NotFound", Notifications, Notifications.Count);
         }
 
         public async Task<IResponse> GetAsyncFis(string cpf, string name, string rg)
         {
             Domain.Entities.Customer findList = null;
-            try
-            {
-                if (!string.IsNullOrEmpty(cpf))
-                    findList = await _context.Customers.Find(x => x.Document.DocumentNumber == cpf).FirstOrDefaultAsync();
-                else if (!string.IsNullOrEmpty(name))
-                    findList = await _context.Customers.Find(x => x.PersonFis.Name == name).FirstOrDefaultAsync();
-                else if (!string.IsNullOrEmpty(rg))
-                    findList = await _context.Customers.Find(x => x.PersonFis.Rg == rg).FirstOrDefaultAsync();
 
-                if (findList != null)
-                    return new ResponseOk<Domain.Entities.Customer>(findList);
+            if (!string.IsNullOrEmpty(cpf))
+                findList = _list.AsQueryable().FirstOrDefault(x => x.Document.DocumentNumber == cpf);
+            else if (!string.IsNullOrEmpty(name))
+                findList = _list.AsQueryable().FirstOrDefault(x => x.PersonFis.Name == name);
+            else if (!string.IsNullOrEmpty(rg))
+                findList = _list.AsQueryable().FirstOrDefault(x => x.PersonFis.Rg == rg);
 
-                AddNotification("Error", "NotFound");
+            if (findList != null)
+                return new ResponseOk<Domain.Entities.Customer>(findList);
 
-                return new ResponseError<Domain.Entities.Customer>("404", "NotFound", Notifications, Notifications.Count);
+            AddNotification("Error", "NotFound");
 
-            }
-            catch (Exception ex)
-            {
-                AddNotification("Error", ex.Message);
-
-                return new ResponseError<Domain.Entities.Customer>("400", ex.Message, Notifications, Notifications.Count);
-            }
+            return new ResponseError<Domain.Entities.Customer>("404", "NotFound", Notifications, Notifications.Count);
         }
 
         public async Task<IResponse> GetAsyncJur(string cnpj, string corporateName, string fantasyName)
         {
             Domain.Entities.Customer findList = null;
-            try
-            {
-                if (!string.IsNullOrEmpty(cnpj))
-                    findList = await _context.Customers.Find(x => x.Document.DocumentNumber == cnpj).FirstOrDefaultAsync();
-                else if (!string.IsNullOrEmpty(corporateName))
-                    findList = await _context.Customers.Find(x => x.PersonJur.CorporateName == corporateName).FirstOrDefaultAsync();
-                else if (!string.IsNullOrEmpty(fantasyName))
-                    findList = await _context.Customers.Find(x => x.PersonJur.FantasyName == fantasyName).FirstOrDefaultAsync();
 
-                if (findList != null)
-                    return new ResponseOk<Domain.Entities.Customer>(findList);
+            if (!string.IsNullOrEmpty(cnpj))
+                findList = _list.AsQueryable().FirstOrDefault(x => x.Document.DocumentNumber == cnpj);
+            else if (!string.IsNullOrEmpty(corporateName))
+                findList = _list.AsQueryable().FirstOrDefault(x => x.PersonJur.CorporateName == corporateName);
+            else if (!string.IsNullOrEmpty(fantasyName))
+                findList = _list.AsQueryable().FirstOrDefault(x => x.PersonJur.FantasyName == fantasyName);
 
-                AddNotification("Error", "NotFound");
+            if (findList != null)
+                return new ResponseOk<Domain.Entities.Customer>(findList);
 
-                return new ResponseError<Domain.Entities.Customer>("404", "NotFound", Notifications, Notifications.Count);
+            AddNotification("Error", "NotFound");
 
-            }
-            catch (Exception ex)
-            {
-                AddNotification("Error", ex.Message);
-
-                return new ResponseError<Domain.Entities.Customer>("400", ex.Message, Notifications, Notifications.Count);
-            }
+            return new ResponseError<Domain.Entities.Customer>("404", "NotFound", Notifications, Notifications.Count);
         }
 
         public async Task<IResponse> GetByIdAsync(string id)
         {
-            try
-            {
+            var find = _list.AsQueryable().FirstOrDefault(x => x.Id == id);
 
-                var find = await _context.Customers.Find(x => x.Id == id).FirstOrDefaultAsync();
+            if (find != null)
+                return new ResponseOk<Domain.Entities.Customer>(find);
 
-                if (find != null)
-                    return new ResponseOk<Domain.Entities.Customer>(find);
+            AddNotification("Error", "NotFound");
 
-                AddNotification("Error", "NotFound");
-
-                return new ResponseError<Domain.Entities.Customer>("404", "NotFound", Notifications, Notifications.Count);
-
-            }
-            catch (Exception ex)
-            {
-                AddNotification("Error", ex.Message);
-
-                return new ResponseError<IEnumerable<Domain.Entities.Customer>>("400", ex.Message, Notifications, Notifications.Count);
-            }
+            return new ResponseError<Domain.Entities.Customer>("404", "NotFound", Notifications, Notifications.Count);
         }
 
         public async Task<IResponse> Update(Domain.Entities.Customer customer)
         {
-            try
-            {
-                _context.Customers.ReplaceOne(x => x.Id == customer.Id, customer);
+            UpdateDb += new UpdateEventHandler(UpdateDatabase);
 
-                return new ResponseOk<Domain.Entities.Customer>(customer);
-            }
-            catch (Exception e)
+            HandlerCustomer(customer);
+
+            return new ResponseOk<Domain.Entities.Customer>(customer);
+        }
+
+        void HandlerCustomer(Domain.Entities.Customer customer)
+        {
+            Convert += new ConvertToListEventHandler(ConvertToList);
+
+            if (!_dictionary.ContainsKey(customer.Id))
+                OnInsertDatabase(new QueueEventsArgs(customer));
+            else
+            OnUpdateDatabase(new QueueEventsArgs(customer));
+        }
+
+        public virtual void OnInsertDatabase(QueueEventsArgs e)
+        {
+            if (InsertDb != null)
             {
-                AddNotification("Error", e.Message);
-                return new ResponseError<Domain.Entities.Customer>("400", e.Message, Notifications, Notifications.Count);
+                var customer = e.Customers;
+                var key = e.Customers.Id;
+                _dictionary[key] = customer;
+                _dictionary.AddDictionary();
+                InsertDb(this, e);
+                if (Convert != null)
+                    Convert(this, new ListEventsArgs(_dictionary));
             }
+        }
+
+        public virtual void OnUpdateDatabase(QueueEventsArgs e)
+        {
+            if (UpdateDb != null)
+            {
+                var customer = e.Customers;
+                var key = e.Customers.Id;
+                _dictionary.Remove(key);
+                _dictionary[key] = customer;
+                UpdateDb(this, e);
+                if (Convert != null)
+                    Convert(this, new ListEventsArgs(_dictionary));
+            }
+        }
+
+        public virtual void OnConvertToList(ListEventsArgs e)
+        {
+            if (Convert != null)
+                Convert(this, e);
+        }
+        
+        void InsertDatabase(object sesnder, QueueEventsArgs e)
+        {
+            var customer = e.Customers;
+            EnqueueInsert(customer);
+        }
+
+        void UpdateDatabase(object sender, QueueEventsArgs e)
+        {
+            var customer = e.Customers;
+            EnqueueUpdate(customer);
+        }
+
+        void ConvertToList(object sender, ListEventsArgs e)
+        {
+            var dictionary = e.Dictionary;
+            _list.Clear();
+
+            foreach (var item in dictionary)
+                _list.Add(item.Value);
+        }
+
+        void EnqueueInsert(Domain.Entities.Customer customer)
+        {
+            _queue.Enqueue(customer);
+            _context.Add(_queue);
+        }
+
+        void EnqueueUpdate(Domain.Entities.Customer customer)
+        {
+            _queue.Enqueue(customer);
+            _context.Update(_queue);
+        }
+
+        async void LoadList()
+        {
+            Convert += new ConvertToListEventHandler(ConvertToList);
+
+            var find = await _context.Customers.Find(x => x.Id != null).ToListAsync();
+
+            foreach (var item in find)
+                _dictionary[item.Id] = item;
+
+            OnConvertToList(new ListEventsArgs(_dictionary));
         }
     }
 }

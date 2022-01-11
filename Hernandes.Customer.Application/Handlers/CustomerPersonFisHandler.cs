@@ -120,7 +120,7 @@ namespace Hernandes.Customer.Application.Handlers
                 return validateUpdate;
 
             // Add customer entity to data repository
-            var validateRepository = await _repository.Add(customer);
+            var validateRepository = await _repository.Update(customer);
 
             // Validates if there was an error executing the operation
             if (validateRepository.HasError())
