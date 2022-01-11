@@ -113,6 +113,7 @@ MongoDB é um software de banco de dados orientado a documentos livre, de códig
 
 Classificado como um programa de banco de dados NoSQL, o MongoDB usa documentos semelhantes a JSON com esquemas.
 
+---
 
 ## Como executar o projeto ?
 
